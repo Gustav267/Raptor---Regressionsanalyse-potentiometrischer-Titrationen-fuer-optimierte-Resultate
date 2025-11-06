@@ -23,6 +23,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Potentiometrie GUI")
         self.setMinimumSize(600, 400)
         self.resize(800, 600)
+        self.showMaximized()
 
         def none() -> None:
             pass

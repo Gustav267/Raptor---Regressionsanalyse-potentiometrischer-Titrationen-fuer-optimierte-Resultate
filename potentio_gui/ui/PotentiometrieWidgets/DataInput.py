@@ -1,8 +1,6 @@
-from xml.etree.ElementInclude import include
-
+from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QPushButton, QTableWidget, QDoubleSpinBox, QCheckBox
-from PyQt6.QtCore import Qt, QSize
 
 from potentio_gui.ui.PotentiometrieWidgets import OptionalDatapoint
 

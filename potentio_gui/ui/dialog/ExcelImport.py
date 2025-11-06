@@ -1,6 +1,14 @@
 import logging
 
-from PyQt6.QtGui import QClipboard, QIcon, QGuiApplication
+from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtGui import (
+    QClipboard,
+    QIcon,
+    QGuiApplication,
+    QMovie,
+    QShortcut,
+    QKeySequence,
+)
 from PyQt6.QtWidgets import (
     QDialog,
     QWidget,
@@ -9,10 +17,13 @@ from PyQt6.QtWidgets import (
     QLabel,
     QDialogButtonBox,
     QPushButton,
+    QHBoxLayout,
 )
 from black.trans import Callable
 
+from potentio_gui.ui.Line import QVLine
 from potentio_gui.ui.PotentiometrieWidgets import OptionalDatapoint
+from potentio_gui.ui.assets import COPY_EXCEL_GIF
 
 
 class ExcelImport(QDialog):
@@ -28,7 +39,7 @@ class ExcelImport(QDialog):
         self.setWindowTitle("Template Erstellen")
         self.setWindowIcon(parent.windowIcon())
 
-        layout = QVBoxLayout(self)
+        layout = QVBoxLayout()
         self.label = QLabel("Excel Dateien hier rein pasten (Strg + V)")
         layout.addWidget(self.label)
         paste_button = QPushButton(
@@ -48,7 +59,23 @@ class ExcelImport(QDialog):
         self.buttonbox.accepted.connect(self.accept)
         self.buttonbox.rejected.connect(self.reject)
         layout.addWidget(self.buttonbox)
-        self.setLayout(layout)
+
+        master_layout = QHBoxLayout(self)
+        paste_widget = QWidget(parent=self)
+        paste_widget.setLayout(layout)
+        master_layout.addWidget(paste_widget)
+        master_layout.addWidget(QVLine())
+        gif_widget = GifWidget(gif_path=str(COPY_EXCEL_GIF), parent=self)
+        master_layout.addWidget(gif_widget)
+
+        self.setLayout(master_layout)
+
+        # Accept the dialog on Ctrl+Enter
+        shortcut = QShortcut(QKeySequence("Ctrl+Return"), self)
+        shortcut.activated.connect(self.accept)
+        shortcut2 = QShortcut(QKeySequence("Ctrl+Enter"), self)
+        shortcut2.activated.connect(self.accept)
+        self.text_frame.setFocus()
 
     def __paste(self):
         text = QGuiApplication.clipboard().text(QClipboard.Mode.Clipboard)
@@ -57,7 +84,9 @@ class ExcelImport(QDialog):
 
     def accept(self):
         self.logger.debug("Accepting with text '%s'" % self.text_frame.toPlainText())
-        text = self.text_frame.toPlainText()
+        text = self.text_frame.toPlainText().replace(
+            ",", ".", 1000
+        )  # Convert german decimal denominator "," to "." for python processing
         try:
             data = [row.split("\t") for row in text.splitlines(False)]
             return_data = [
@@ -73,3 +102,31 @@ class ExcelImport(QDialog):
 
     def reject(self):
         super().reject()
+
+
+class GifWidget(QWidget):
+    def __init__(self, gif_path: str, parent=None):
+        super().__init__(parent)
+
+        # QLabel to show the GIF
+        self.label = QLabel(parent=self)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label.setScaledContents(True)
+
+        # Load the animated GIF
+        self.movie = QMovie(gif_path)
+        self.movie.setCacheMode(QMovie.CacheMode.CacheAll)
+        self.movie.setSpeed(100)  # 100% speed
+        self.movie.loopCount = -1  # Loop indefinitely
+        self.movie.setScaledSize(QSize(343, 913))
+
+        # Attach movie to label
+        self.label.setMovie(self.movie)
+
+        # Start animation
+        self.movie.start()
+
+        # Layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.label)
+        self.setLayout(layout)
