@@ -17,7 +17,7 @@ from PyQt6.QtWidgets import (
     QLabel,
     QDialogButtonBox,
     QPushButton,
-    QHBoxLayout,
+    QHBoxLayout, QMessageBox,
 )
 from black.trans import Callable
 
@@ -97,8 +97,23 @@ class ExcelImport(QDialog):
             super().accept()
         except IndexError as err:
             self.logger.exception(f"Could not parse copied Data! IndexError! {err}")
+            QMessageBox.critical(
+                self,
+                "Fehler!",
+                "Daten konnten nicht importiert werden!\n\nEs müssen pro Zeile genau zwei Zahlen stehen, die durch die 'Tab' Taste getrennt werden!",
+                buttons=QMessageBox.StandardButton.Ok,
+                defaultButton=QMessageBox.StandardButton.Ok,
+            )
         except ValueError as err:
             self.logger.exception(f"Could not parse copied Data! ValueError! {err}")
+            error_word = str(err).splitlines(True)[0][len("could not convert string to float: '"):-1]
+            QMessageBox.critical(
+                self,
+                "Fehler!",
+                f"Daten konnten nicht importiert werden!\n\nEs wurde eine Nicht-Zahl gefunden: {error_word}\nBitte den Fehler beheben und erneut versuchen!",
+                buttons=QMessageBox.StandardButton.Ok,
+                defaultButton=QMessageBox.StandardButton.Ok,
+            )
 
     def reject(self):
         super().reject()
