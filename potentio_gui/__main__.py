@@ -1,12 +1,21 @@
 import logging
+import os
 import sys
 
 from PyQt6.QtWidgets import QApplication
 
 from potentio_gui.ui.MainWindow import MainWindow
 
+os.environ["QT_QPA_PLATFORMTHEME"] = "kde"
+
+from PyQt6.QtWidgets import QStyleFactory
+
+print(QStyleFactory.keys())
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    # app.setStyle("Windows")
+    app.setStyle("Breeze")
 
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",

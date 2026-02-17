@@ -1,6 +1,5 @@
 import logging
 
-from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 
 from potentio_gui.lib.potentiometrie import create_plot
@@ -43,13 +42,13 @@ class PotentiometrieWindow(QWidget):
         self.plot_canvas = PlotCanvas(parent=self)
         sublayout.addWidget(
             self.plot_canvas,
-            alignment=Qt.AlignmentFlag.AlignHCenter,
+            stretch=1,
         )
         subwidget.setLayout(sublayout)
         self.layout.addWidget(subwidget)
 
         # Pin all the items to the top
-        self.layout.insertStretch(-1, 1)
+        # self.layout.insertStretch(-1, 1)
         self.setLayout(self.layout)
 
     def update_data(self, data: list[OptionalDatapoint]):

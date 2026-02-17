@@ -7,18 +7,18 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "lmfit>=1.3.4",
-    "matplotlib>=3.10.7",
-    "numpy>=2.3.4",
-    "pandas>=2.3.3",
-    "pandas-stubs==2.3.2.250926",
-    "pyqt6>=6.10.0",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.2",
+    "pandas>=3.0.0",
+    "pandas-stubs==3.0.0.260204",
+    "pyqt6>=6.10.2",
     "pyxdg>=0.28",
-    "scipy>=1.16.3",
-    "scipy-stubs==1.16.3.0",
+    "scipy>=1.17.0",
+    "scipy-stubs==1.17.0.2",
 ]
 
 [dependency-groups]
 dev = [
-    "black>=25.9.0",
-    "pyinstaller>=6.16.0",
+    "black>=26.1.0",
+    "pyinstaller>=6.19.0",
 ]

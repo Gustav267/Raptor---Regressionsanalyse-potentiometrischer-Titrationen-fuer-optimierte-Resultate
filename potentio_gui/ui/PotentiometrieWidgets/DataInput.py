@@ -1,6 +1,14 @@
-from PyQt6.QtCore import Qt, QSize
+import logging
+
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QPushButton, QTableWidget, QDoubleSpinBox, QCheckBox
+from PyQt6.QtWidgets import (
+    QPushButton,
+    QTableWidget,
+    QDoubleSpinBox,
+    QCheckBox,
+    QSizePolicy,
+)
 
 from potentio_gui.ui.PotentiometrieWidgets import OptionalDatapoint
 
@@ -8,6 +16,7 @@ from potentio_gui.ui.PotentiometrieWidgets import OptionalDatapoint
 class DataInput(QTableWidget):
     def __init__(self, update_callback, parent=None):
         super().__init__(0, 4, parent)
+        self.logger = logging.getLogger(__name__)
         self.setSizeAdjustPolicy(QTableWidget.SizeAdjustPolicy.AdjustToContents)
 
         self.update_callback = update_callback
@@ -16,11 +25,15 @@ class DataInput(QTableWidget):
         self.setHorizontalHeaderLabels(["Volumen", "pH-Wert", "Einbeziehen?", ""])
         self.horizontalHeader().setStretchLastSection(True)
         self.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignLeft)
+        # self.setColumnWidth(3, 100)
 
         # Styling header bold
         font = self.horizontalHeader().font()
         font.setBold(True)
         self.horizontalHeader().setFont(font)
+        self.setSizePolicy(
+            QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Expanding
+        )
 
     def add_row(self, volume=0.0, ph=0.0, included=True):
         row_position = self.rowCount()
@@ -99,11 +112,12 @@ class DataInput(QTableWidget):
 
         self._trigger_update()
 
-    def sizeHint(self) -> QSize:
-        # Calculate total height dynamically based on rows + header
-        height = self.horizontalHeader().height()
-        for row in range(self.rowCount()):
-            height += self.rowHeight(row)
-        # Add some space for frame, margins, etc.
-        height += 4
-        return QSize(super().sizeHint().width(), height)
+#    def sizeHint(self) -> QSize:
+#        # Calculate total height dynamically based on rows + header
+#        height = self.horizontalHeader().height()
+#        for row in range(self.rowCount()):
+#            height += self.rowHeight(row)
+#        # Add some space for frame, margins, etc.
+#        height += 4
+#        self.logger.debug(f"{self.horizontalHeader().width()=}")
+#        return QSize(self.horizontalHeader().width(), height)
