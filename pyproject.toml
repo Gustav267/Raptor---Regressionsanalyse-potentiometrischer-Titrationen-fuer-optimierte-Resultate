@@ -2,7 +2,7 @@
 name = "potentio_gui"
 version = "0.1.0"
 description = ""
-authors = ["MaFeLP <mafelp@proton.me>"]
+authors = [{name = "MaFeLP", email = "mafelp@proton.me"}]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

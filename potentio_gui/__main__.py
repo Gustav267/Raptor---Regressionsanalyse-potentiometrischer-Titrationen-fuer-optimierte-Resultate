@@ -6,7 +6,8 @@ from PyQt6.QtWidgets import QApplication
 
 from potentio_gui.ui.MainWindow import MainWindow
 
-os.environ["QT_QPA_PLATFORMTHEME"] = "kde"
+# Uncomment this line on KDE to have a nicer layout/theme.
+# os.environ["QT_QPA_PLATFORMTHEME"] = "kde"
 
 from PyQt6.QtWidgets import QStyleFactory
 
@@ -15,7 +16,7 @@ print(QStyleFactory.keys())
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     # app.setStyle("Windows")
-    app.setStyle("Breeze")
+    # app.setStyle("Breeze")
 
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
