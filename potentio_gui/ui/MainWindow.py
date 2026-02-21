@@ -4,7 +4,6 @@ import logging
 
 from PyQt6.QtWidgets import QMainWindow
 
-from potentio_gui.ui.Homepage import Homepage
 from potentio_gui.ui.MainScrollArea import MainScrollArea
 from potentio_gui.ui.Menubar import Menubar
 from potentio_gui.ui.Potentiometrie import PotentiometrieWindow
@@ -28,7 +27,6 @@ class MainWindow(QMainWindow):
         def none() -> None:
             pass
 
-        self.homepage = Homepage(self, none)
         self.potentiometrie = PotentiometrieWindow(self)
         self.scroll_area = MainScrollArea(self.potentiometrie)
         self.setCentralWidget(self.scroll_area)
