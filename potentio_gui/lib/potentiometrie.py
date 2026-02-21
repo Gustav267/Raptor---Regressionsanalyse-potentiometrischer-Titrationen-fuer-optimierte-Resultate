@@ -6,8 +6,8 @@ from matplotlib.axes import Axes
 from scipy.optimize import root_scalar
 
 
-def create_plot(vol_naoh1: list[float], ph_wert1: list[float], ax1: Axes):
-    if len(vol_naoh1) != len(ph_wert1) or len(vol_naoh1) <= 8 or len(ph_wert1) <= 8:
+def create_plot(vol_naoh: pd.Series, ph_wert: pd.Series, ax1: Axes):
+    if len(vol_naoh) != len(ph_wert) or len(vol_naoh) <= 8 or len(ph_wert) <= 8:
         return
 
     # Anzahl der Iterationen für den Fit (je mehr, desto genauer,maximal 10^10)
@@ -19,7 +19,7 @@ def create_plot(vol_naoh1: list[float], ph_wert1: list[float], ax1: Axes):
     # print(f'CTA: {cta}, i: {i}')
     # Drop all pH values strictly between 4 and 10 and their corresponding vol_naoh
     # Keep only points where pH <= 4 or pH >= 10
-    vol_naoh, ph_wert = pd.Series(vol_naoh1), pd.Series(ph_wert1)
+    #vol_naoh, ph_wert = pd.Series(vol_naoh1), pd.Series(ph_wert1)
 
     # Berechnung des Startwerts für C --> mittelwert der x-Werte an der größten Steigung
     max_diff_index = np.argmax(np.diff(ph_wert))
