@@ -112,6 +112,7 @@ class DataInput(QTableWidget):
 
         self._trigger_update()
 
+
 #    def sizeHint(self) -> QSize:
 #        # Calculate total height dynamically based on rows + header
 #        height = self.horizontalHeader().height()

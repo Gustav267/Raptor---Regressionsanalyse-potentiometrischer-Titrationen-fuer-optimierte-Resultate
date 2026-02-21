@@ -108,7 +108,7 @@ class ExcelImport(QDialog):
         except ValueError as err:
             self.logger.exception(f"Could not parse copied Data! ValueError! {err}")
             error_word = str(err).splitlines(True)[0][
-                len("could not convert string to float: '"): -1
+                len("could not convert string to float: '") : -1
             ]
             QMessageBox.critical(
                 self,

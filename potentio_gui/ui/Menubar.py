@@ -14,12 +14,12 @@ logger = logging.getLogger(__name__)
 
 class Menubar(QMenuBar):
     def __init__(
-            self,
-            clear_data: Callable[[], None],
-            import_data: Callable[[], None],
-            add_data_row: Callable[[], None],
-            generate_plot: Callable[[], None],
-            parent: QMainWindow,
+        self,
+        clear_data: Callable[[], None],
+        import_data: Callable[[], None],
+        add_data_row: Callable[[], None],
+        generate_plot: Callable[[], None],
+        parent: QMainWindow,
     ) -> None:
         """The Menubar of the application.
 

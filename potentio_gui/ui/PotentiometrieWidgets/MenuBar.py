@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (
     QSpacerItem,
     QSizePolicy,
 )
-from black.trans import Callable
+from typing import Callable
 
 from potentio_gui.ui.PotentiometrieWidgets import OptionalDatapoint
 from potentio_gui.ui.dialog.ExcelImport import ExcelImport

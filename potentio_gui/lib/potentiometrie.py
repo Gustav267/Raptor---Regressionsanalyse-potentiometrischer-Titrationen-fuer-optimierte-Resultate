@@ -211,7 +211,7 @@ def create_plot(vol_naoh1: list[float], ph_wert1: list[float], ax1: Axes):
     ph_fit_deriv = erst_abl(x_linespace_scaled, **result.best_values)
     ph_fit_deriv2 = zwe_abl(x_linespace_scaled, **result.best_values)
     # Plot der Titrationskurve und Ableitung
-    #fig, ax1 = plt.subplots(figsize=(19.37 * cm, 12.9133 * cm))
+    # fig, ax1 = plt.subplots(figsize=(19.37 * cm, 12.9133 * cm))
     ax2 = ax1.twinx()
     ax2.zorder = 0
     ax1.zorder = 1
@@ -330,7 +330,7 @@ def create_plot(vol_naoh1: list[float], ph_wert1: list[float], ax1: Axes):
         text.set_color(color)
     for text in l2.get_texts():
         text.set_color(color)
-    #plt.tight_layout()
+    # plt.tight_layout()
     for spine in ax1.spines.values():
         spine.set_color(color)
     for spine in ax2.spines.values():
