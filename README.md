@@ -1,3 +1,3 @@
-# Automated-analysis-of-potentiometric-titrations
+# Raptor - Regressionsanalyse potentiometrischer Titrationen fuer optimierte Resultate
 
 Hallo Welt!
