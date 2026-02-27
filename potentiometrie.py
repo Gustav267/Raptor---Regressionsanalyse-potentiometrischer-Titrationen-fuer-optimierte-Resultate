@@ -13,7 +13,7 @@ iterationen = 100000000
 df = pd.read_excel("C:\\Users\\Gusta\\Documents\\Jugend forscht\\Datensaetze\\Potentiometrie-all-data.xlsx")
 vol_naoh, ph_wert = df.iloc[5:, i*2].dropna(), df.iloc[5:, i*2+1].dropna()
 
-print(f'CTA: {cta}, i: {i}')
+
 
 
 # feststellung der min und max Werte für die x-Achse (Volumen NaOH)
