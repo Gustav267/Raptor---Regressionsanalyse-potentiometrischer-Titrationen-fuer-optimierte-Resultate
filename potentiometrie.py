@@ -12,7 +12,7 @@ iterationen = 100000000
 # Excel-Datei einlesen(möglichst viele und dichte Messpunkte)
 df = pd.read_excel("C:\\Users\\Gusta\\Documents\\Jugend forscht\\Datensaetze\\Potentiometrie-all-data.xlsx")
 vol_naoh, ph_wert = df.iloc[5:, i*2].dropna(), df.iloc[5:, i*2+1].dropna()
-cta=("%s%s" % (str(df.iloc[2, (i*2)+1]),df.iloc[3, (i*2)+1]))
+
 print(f'CTA: {cta}, i: {i}')
 
 
